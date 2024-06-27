@@ -22,24 +22,13 @@ def download_video(url, folder, download_type):
 st.title("YouTube Downloader")
 
 # Input URL
-video_url = st.text_input("Paste YouTube URL here:", key="video_url")
+video_url = st.text_input("Paste YouTube URL here:")
 
 # Select download type
-download_type = st.radio("Select download type:", ("Video (MP4)", "Audio (MP3)"), key="download_type")
-
-# Function to get default download path
-def get_default_download_path():
-    if os.name == 'nt':
-        return os.path.join(os.path.expanduser('~'), 'Downloads')
-    else:
-        return os.path.join(os.path.expanduser('~'), 'Downloads')
+download_type = st.radio("Select download type:", ("Video (MP4)", "Audio (MP3)"))
 
 # Browse and select download folder
-download_folder = st.text_input("Download folder path:", value=get_default_download_path(), key="download_folder")
-
-if st.button("Set to Downloads Folder"):
-    download_folder = get_default_download_path()
-    st.text_input("Download folder path:", value=download_folder, key="download_folder_set")
+download_folder = st.text_input("Download folder path:", value=os.path.expanduser("~"))
 
 if st.button("Download"):
     if not video_url:
